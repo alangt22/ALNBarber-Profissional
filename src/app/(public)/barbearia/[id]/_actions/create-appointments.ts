@@ -3,6 +3,9 @@ import prisma from "@/lib/prisma";
 import { z } from "zod";
 import { sendSMS } from "@/lib/sendSMS";
 
+import { Subscription } from "@prisma/client";
+import { canSendSMS } from "@/utils/permissions/can-send-sms";
+
 const formSchema = z.object({
   name: z.string().min(1, "O nome é obrigatório"),
   email: z.string().email("O email é obrigatório"),
@@ -10,7 +13,7 @@ const formSchema = z.object({
   date: z.date(),
   serviceId: z.string().min(1, "O serviço é obrigatório"),
   time: z.string().min(1, "O horário é obrigatório"),
-  clinicId: z.string().min(1, "O horário é obrigatório"),
+  clinicId: z.string().min(1, "O id da barbearia é obrigatório"),
   barberName: z.string().optional().nullable(),
 });
 type FormSchema = z.infer<typeof formSchema>;
@@ -71,20 +74,34 @@ export async function createNewAppointment(formData: FormSchema) {
       return { data: newAppointment, warning: "Telefone da barbearia ausente" };
     }
 
+    // ///////////////////////////////
+    // --> VERIFICAÇÃO DO PLANO AQUI
+    // busca subscription ativa da barbearia (caso exista)
+    const subscription: Subscription | null = await prisma.subscription.findFirst({
+      where: {
+        userId: formData.clinicId,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    // decide se envia SMS
+    const { send } = await canSendSMS(subscription);
+
+    if (!send) {
+      // não enviar SMS porque o plano é BASIC ou não tem assinatura ativa
+      return { data: newAppointment, smsEnviado: false, note: "Plano BASIC ou sem assinatura ativa — SMS não enviado" };
+    }
+
     // mensagem curta solicitada — sem acentos/char especiais (GSM-7)
     const dateShort = formatDateShort(selectedDate); // 12/01/25
-    const encodedText = encodeURIComponent("Ok");
-
-
-const smsMessage = `${clinic?.name}
+    const smsMessage = `${clinic?.name}
 ${formData.name} Agendamento: ${dateShort} - ${formData.time}
 Confirmar: https://wa.me/55${barberPhone}?text=Confirmar%20agendamento`;
 
-
-
+    // envia SMS para o cliente (apenas se send === true)
     await sendSMS(formData.phone, smsMessage);
 
-    return { data: newAppointment };
+    return { data: newAppointment, smsEnviado: true };
   } catch (error) {
     console.error("Erro ao cadastrar agendamento:", error);
     return { error: "Erro ao cadastrar agendamento" };

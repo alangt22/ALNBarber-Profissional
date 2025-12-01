@@ -34,7 +34,7 @@ export function SubscriptionButton({ type }: SubscriptionButtonProps) {
 
   return (
     <Button
-      className={`w-full ${
+      className={`w-full cursor-pointer ${
         type === "PROFESSIONAL" && "bg-emerald-500 hover:bg-emerald-400"
       }`}
       onClick={handleCreateBilling}

@@ -23,8 +23,8 @@ export const subscriptionPlans = [
         id: "BASIC",
         name: "Basic",
         description: "Perfeito para empresas menores",
-        oldPrice: "R$ 97,90",
-        price: "R$ 27,90",
+        oldPrice: "R$ 179,90",
+        price: "R$ 79,99",
         features: [
             ` Até ${PLANS["BASIC"].maxServices} Serviços`,
             'Agendamentos ilimitados',
@@ -36,12 +36,13 @@ export const subscriptionPlans = [
         id: "PROFESSIONAL",
         name: "Profissional",
         description: "Ideal para empresas grandes",
-        oldPrice: "R$ 197,90",
-        price: "R$ 97,90",
+        oldPrice: "R$ 297,90",
+        price: "R$ 179,99",
         features: [
             ` Até ${PLANS["PROFESSIONAL"].maxServices} Serviços`,
             'Agendamentos ilimitados',
             'Suporte prioritario',
+            'Até 200 SMS'
         ]
 
     }

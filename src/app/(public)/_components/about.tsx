@@ -83,7 +83,7 @@ export function About() {
               </p>
 
               <p className="text-base text-muted-foreground leading-relaxed">
-                Ideal para diversos segmentos, a Agenda Pro facilita o controle de agendas, a comunicação com clientes e
+                Ideal para diversos segmentos, a <span className="text-blue-500 font-bold">ALN</span><span className="text-white font-bold">Barber</span> facilita o controle de agendas, a comunicação com clientes e
                 a maximização da produtividade, oferecendo uma experiência ágil e organizada para profissionais de
                 diversas áreas.
               </p>

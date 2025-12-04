@@ -11,7 +11,7 @@ export type PlansProps = {
 
 export const PLANS: PlansProps = {
     BASIC: {
-        maxServices: 3,
+        maxServices: 10,
     },
     PROFESSIONAL: {
         maxServices: 50,   

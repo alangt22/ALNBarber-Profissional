@@ -58,7 +58,7 @@ export function Header() {
                 alt="Foto de Perfil"
                 width={32}
                 height={32}
-                className="object-cover"
+                className="object-cover w-full h-full"
               />
             </div>
           )}

@@ -5,15 +5,13 @@ import { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "ALNBarber - Serviços",
-  description: "Serviços - ALNBarber",
-  robots:{
-    index: true,
-    follow: true,
-    nocache: true
+  title: "Serviços | ALNBarber",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
   },
 };
-
 export default async function Services() {
   const session = await getSession();
 

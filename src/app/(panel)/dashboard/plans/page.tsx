@@ -7,29 +7,11 @@ import { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-  title: "ALNBarber - Planos",
+  title: "Planos | ALNBarber",
   description: "Planos - ALNBarber",
-      keywords: [
-    "barbearia",
-    "gestão de barbearia",
-    "agendamento online",
-    "SaaS barbearia",
-    "plataforma para barbeiros",
-    "sistema para barbearia",
-    "software barbearia",
-    "barbeiros",
-    "agenda barbearia",
-    "clientes barbearia"
-  ],
-  authors: [
-    { name: "ALNBarber" },
-  ],
-  creator: "ALNBarber",
-  publisher: "ALNBarber",
-  applicationName: "ALNBarber",
   robots:{
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
     nocache: true
   },
 };

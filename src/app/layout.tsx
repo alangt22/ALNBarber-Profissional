@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SessionAuthProvider } from '@/components/session-auth'
-import {Toaster} from 'sonner'
-import {QueryClientContext} from '@/providers/queryclient'
+import { SessionAuthProvider } from "@/components/session-auth";
+import { Toaster } from "sonner";
+import { QueryClientContext } from "@/providers/queryclient";
 import { AosInit } from "./(public)/_components/aos-init";
 
 const geistSans = Geist({
@@ -17,9 +17,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ALNBarber - Encontre os melhores profissionais em um único local!",
-  description: "Somos uma plataforma dedicada a diversos segmentos, com o objetivo de agilizar o atendimento de forma simples, organizada e eficiente.",
-    keywords: [
+  title: "ALNBarber | Encontre os melhores barbeiros em um só lugar"
+,
+  description:
+    "Descubra barbeiros profissionais perto de você, agende seu horário online com facilidade.",
+  keywords: [
     "barbearia",
     "gestão de barbearia",
     "agendamento online",
@@ -29,31 +31,32 @@ export const metadata: Metadata = {
     "software barbearia",
     "barbeiros",
     "agenda barbearia",
-    "clientes barbearia"
+    "clientes barbearia",
   ],
-    authors: [
-    { name: "ALNBarber" },
-  ],
+  openGraph: {
+    title: "ALNBarber | Encontre os melhores barbeiros em um só lugar"
+,
+    description:
+      "Descubra barbeiros profissionais perto de você, agende seu horário online com facilidade.",
+    url: `${process.env.NEXT_PUBLIC_URL}`,
+    type: "website",
+    images: [`${process.env.NEXT_PUBLIC_URL}/alnbarber.png`],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ALNBarber | Encontre os melhores barbeiros em um só lugar"
+,
+    description:
+      "Descubra barbeiros profissionais perto de você, agende seu horário online com facilidade.",
+    images: [`${process.env.NEXT_PUBLIC_URL}/alnbarber.png`],
+  },
+  alternates: {
+    canonical: `${process.env.NEXT_PUBLIC_URL}`,
+  },
+  authors: [{ name: "ALNBarber" }],
   creator: "ALNBarber",
   publisher: "ALNBarber",
   applicationName: "ALNBarber",
-  robots:{
-    index: true,
-    follow: true,
-    nocache: true
-  },
-  openGraph:{
-    title: "ALNBarber - Encontre os melhores profissionais em um único local!",
-    description: "Somos uma plataforma dedicada a diversos segmentos, com o objetivo de agilizar o atendimento de forma simples, organizada e eficiente.",
-    url: `${process.env.NEXT_PUBLIC_URL}`, 
-    type: "website"
-  },
-  twitter: {
-    card: "summary_large_image", 
-    title: "ALNBarber - Encontre os melhores profissionais em um único local!",
-    description: "Somos uma plataforma dedicada a diversos segmentos, com o objetivo de agilizar o atendimento de forma simples, organizada e eficiente.",
-
-  },
 };
 
 export default function RootLayout({
@@ -62,19 +65,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en"
-    className="overflow-x-hidden dark-blue">
-      
+    <html lang="en" className="overflow-x-hidden dark-blue">
       <body
         className={`overflow-x-hidden ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionAuthProvider>
           <QueryClientContext>
-            <Toaster
-              duration={2500}
-            />
+            <Toaster duration={2500} />
             {children}
-            <AosInit/>
+            <AosInit />
           </QueryClientContext>
         </SessionAuthProvider>
       </body>

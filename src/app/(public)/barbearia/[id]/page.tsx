@@ -9,9 +9,9 @@ interface SchedulePageProps {
 
 // Função dinâmica para gerar metadata
 export async function generateMetadata({
-    params,
-} : {
-    params: Promise<{ id: string}>
+  params,
+}: {
+  params: Promise<{ id: string }>;
 }) {
   const userId = (await params).id;
   const user = await getInfoSchedule({ userId });
@@ -19,25 +19,46 @@ export async function generateMetadata({
   if (!user) {
     return {
       title: "ALNBarber",
-      description: "Painel de controle - ALNBarber",
+      description: "Encontre os melhores barbeiros e agende horários online.",
     };
   }
 
   return {
-    title: `ALNBarber - ${user.name} | Agendamento`,
-    description: "Painel de controle - ALNBarber",
+    title: `Agendamento com ${user.name} | ALNBarber`,
+    description: `Agende horários com ${user.name}, barbeiro profissional na ALNBarber. Corte de cabelo, barba e outros serviços com facilidade online.`,
     keywords: [
-      "barbearia",
-      "gestão de barbearia",
-      "agendamento online",
-      "SaaS barbearia",
-      "plataforma para barbeiros",
-      "sistema para barbearia",
-      "software barbearia",
+      "barbeiro",
       "barbeiros",
-      "agenda barbearia",
-      "clientes barbearia",
+      "corte de cabelo masculino",
+      "barba",
+      "agendamento online barbearia",
+      "marcar horário barbearia",
+      "serviços de barbearia",
+      "barbearia perto de mim",
+      "corte de cabelo",
+      "barba e cabelo",
+      "estilo masculino",
+      "cuidados com a barba",
+      "barbearia profissional",
+      "ALNBarber",
+      "agendamento com barbeiro",
     ],
+    openGraph: {
+      title: `Agendamento com ${user.name} | ALNBarber`,
+      description: `Agende horários com ${user.name}, barbeiro profissional na ALNBarber. Corte de cabelo, barba e outros serviços com facilidade online.`,
+      url: `${process.env.NEXT_PUBLIC_URL}/barbearia/${user.id}`,
+      type: "website",
+      images: [`${process.env.NEXT_PUBLIC_URL}/alnbarber.png`],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Agendamento com ${user.name} | ALNBarber`,
+      description: `Agende horários com ${user.name}, barbeiro profissional na ALNBarber. Corte de cabelo, barba e outros serviços com facilidade online.`,
+      images: [`${process.env.NEXT_PUBLIC_URL}/alnbarber.png`],
+    },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_URL}/barbearia/${user.id}`,
+    },
     authors: [{ name: "ALNBarber" }],
     creator: "ALNBarber",
     publisher: "ALNBarber",
@@ -46,16 +67,23 @@ export async function generateMetadata({
       index: true,
       follow: true,
       nocache: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
   };
 }
 
 export default async function SchedulePage({
-    params,
-} : {
-    params: Promise<{ id: string}>
+  params,
+}: {
+  params: Promise<{ id: string }>;
 }) {
-  const userId = ( await params).id;
+  const userId = (await params).id;
   const user = await getInfoSchedule({ userId });
 
   if (!user) {

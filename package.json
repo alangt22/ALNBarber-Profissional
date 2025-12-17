@@ -33,7 +33,7 @@
     "embla-carousel-react": "^8.6.0",
     "express": "^5.1.0",
     "lucide-react": "^0.483.0",
-    "next": "15.2.6",
+    "next": "15.2.8",
     "next-auth": "^5.0.0-beta.25",
     "nodemailer": "^6.10.0",
     "react": "^19.0.0",

@@ -17,8 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ALNBarber | Encontre os melhores barbeiros em um só lugar"
-,
+  title: "ALNBarber | Encontre os melhores barbeiros em um só lugar",
   description:
     "Descubra barbeiros profissionais perto de você, agende seu horário online com facilidade.",
   keywords: [
@@ -34,8 +33,7 @@ export const metadata: Metadata = {
     "clientes barbearia",
   ],
   openGraph: {
-    title: "ALNBarber | Encontre os melhores barbeiros em um só lugar"
-,
+    title: "ALNBarber | Encontre os melhores barbeiros em um só lugar",
     description:
       "Descubra barbeiros profissionais perto de você, agende seu horário online com facilidade.",
     url: `${process.env.NEXT_PUBLIC_URL}`,
@@ -44,8 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ALNBarber | Encontre os melhores barbeiros em um só lugar"
-,
+    title: "ALNBarber | Encontre os melhores barbeiros em um só lugar",
     description:
       "Descubra barbeiros profissionais perto de você, agende seu horário online com facilidade.",
     images: [`${process.env.NEXT_PUBLIC_URL}/alnbarber.png`],
@@ -66,6 +63,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="overflow-x-hidden dark-blue">
+      <head>
+        <title>ALNBarber | Encontre os melhores barbeiros em um só lugar</title>
+        <meta
+          name="description"
+          content="Descubra barbeiros profissionais perto de você, agende seu horário online com facilidade."
+        />
+        <meta
+          property="og:title"
+          content="ALNBarber | Encontre os melhores barbeiros em um só lugar"
+        />
+        <meta
+          property="og:description"
+          content="Descubra barbeiros profissionais perto de você, agende seu horário online com facilidade."
+        />
+        <meta
+          property="og:image"
+          content="https://alnbarber.app/alnbarber.png"
+        />
+        <meta property="og:url" content="https://alnbarber.app" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="canonical" href="https://alnbarber.app" />
+      </head>
       <body
         className={`overflow-x-hidden ${geistSans.variable} ${geistMono.variable} antialiased`}
       >

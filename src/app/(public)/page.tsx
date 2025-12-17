@@ -5,6 +5,7 @@ import { Header } from "./_components/header";
 import { Hero } from "./_components/hero";
 import { Professionals } from "./_components/professionals";
 import { getProfessional } from "./_data-access/get-professional";
+import { title } from "process";
 
 export const revalidate = 120; 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     "clientes barbearia",
   ],
   openGraph: {
-    title: "ALNBarber - Encontre os melhores profissionais em um único local!",
+    title: "ALNBarber | Encontre os melhores barbeiros em um só lugar",
     description:
       "Descubra barbeiros profissionais perto de você, agende seu horário online com facilidade.",
     url: `${process.env.NEXT_PUBLIC_URL}`,
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ALNBarber - Encontre os melhores profissionais em um único local!",
+  title: "ALNBarber | Encontre os melhores barbeiros em um só lugar",
     description:
       "Descubra barbeiros profissionais perto de você, agende seu horário online com facilidade.",
     images: [`${process.env.NEXT_PUBLIC_URL}/alnbarber.png`],

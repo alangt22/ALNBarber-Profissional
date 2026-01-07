@@ -137,7 +137,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
           href={`https://wa.me/+55${clinic.phone?.replace(
             /\D/g,
             "",
-          )}?text=Olá!%0A%0ADesejo confirmar o meu agendamento.`}
+          )}?text=Olá ${clinic.barber}! %0A%0ADesejo confirmar o meu agendamento.`}
           rel="noreferrer"
         >
           Agendamento confirmado!
@@ -529,7 +529,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                 href={`https://wa.me/+55${clinic.phone?.replace(
                   /\D/g,
                   "",
-                )}?text=Olá!%0A%0ADesejo confirmar o meu agendamento.`}
+                )}?text=Olá ${clinic.barber}! %0A%0ADesejo confirmar o meu agendamento.`}
               >
                 <FaWhatsapp className="w-5 h-5" />
                 Confirmar via WhatsApp

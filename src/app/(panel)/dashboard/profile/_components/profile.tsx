@@ -155,7 +155,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-muted-foreground">Nome da Barbearia</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Digite o nome da clínica..." className="h-11" />
+                      <Input {...field} placeholder="Digite o nome da Barbearia..." className="h-11" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

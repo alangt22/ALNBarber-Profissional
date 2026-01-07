@@ -51,6 +51,7 @@ export function AppointmentList({ times, barber }: AppointmentsListProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [detailAppointment, setDetailAppointment] =
     useState<AppointmentWithService | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["get-appointments", date],
@@ -105,8 +106,11 @@ export function AppointmentList({ times, barber }: AppointmentsListProps) {
     }
   }
 
-  async function handleCancelAppointment(appointmentId: string) {
-    const response = await cancelAppointment({ appointmentId: appointmentId });
+async function handleCancelAppointment(appointmentId: string) {
+  try {
+    setIsDeleting(true);
+
+    const response = await cancelAppointment({ appointmentId });
 
     if (response.error) {
       toast.error(response.error);
@@ -115,8 +119,17 @@ export function AppointmentList({ times, barber }: AppointmentsListProps) {
 
     queryClient.invalidateQueries({ queryKey: ["get-appointments"] });
     await refetch();
+
     toast.success(response.data);
+    setConfirmDelete(false);
+  } catch (error) {
+    toast.error("Erro ao excluir agendamento");
+  } finally {
+    setIsDeleting(false);
+    setAppointmentToDelete(null);
   }
+}
+
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -219,18 +232,24 @@ export function AppointmentList({ times, barber }: AppointmentsListProps) {
             <Button variant="outline" onClick={() => setConfirmDelete(false)}>
               Cancelar
             </Button>
-
             <Button
-              className="cursor-pointer"
+              className="cursor-pointer flex items-center gap-2"
               variant="destructive"
-              onClick={async () => {
+              disabled={isDeleting}
+              onClick={() => {
                 if (appointmentToDelete) {
-                  await handleCancelAppointment(appointmentToDelete);
+                  handleCancelAppointment(appointmentToDelete);
                 }
-                setConfirmDelete(false);
               }}
             >
-              Confirmar
+              {isDeleting ? (
+                <>
+                  <Loader className="w-4 h-4 animate-spin" />
+                  Excluindo...
+                </>
+              ) : (
+                "Confirmar"
+              )}
             </Button>
           </div>
         </DialogContent>
